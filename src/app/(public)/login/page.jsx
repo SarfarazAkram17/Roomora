@@ -30,13 +30,14 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex flex-col max-w-[1500px] mx-auto px-4 sm:flex-row gap-6 justify-start items-center md:justify-center">
-      <Lottie animationData={loginLottie} loop={true}></Lottie>
+    <div className="flex flex-col my-6 max-w-[1500px] mx-auto px-4 sm:flex-row gap-6 justify-start items-center md:justify-center">
+      <Lottie className="flex-1 h-96" animationData={loginLottie} loop={true}></Lottie>
 
-      <div className="w-full flex-1 shadow-xl">
+      <div className="w-full flex-1 shadow-xl rounded-md">
         <div className="px-4 py-12">
           <h1 className="text-3xl font-extrabold">Welcome Back</h1>
-          <p className="mb-4 text-sm font-semibold">Login with Roomora</p>
+          <p className="mb-8 mt-2 text-sm font-semibold">Login with Roomora</p>
+
           <form onSubmit={handleLogin}>
             <div className="mb-6">
               <TextField
