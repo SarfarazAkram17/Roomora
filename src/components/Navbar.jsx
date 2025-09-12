@@ -3,9 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+  const isActive = (path) => pathname === path;
 
   return (
     <header className="sticky top-0 backdrop-blur-2xl p-4 h-20 w-full bg-white shadow-md z-50">
@@ -20,23 +23,59 @@ const Navbar = () => {
 
         {/* Logo */}
         <Link href="/" className="max-md:flex-1">
-          <Image src="/logo.png" alt="Roomora logo" height={90} width={180} />
+          <Image src="/logo.png" alt="Roomora logo" height={80} width={170} />
         </Link>
 
         {/* Desktop Nav */}
         <nav className="hidden md:block flex-1">
           <ul className="flex px-4 items-center justify-center gap-8 font-semibold text-sm xl:text-[1rem]">
             <li>
-              <Link href="/">Home</Link>
+              <Link
+                href="/"
+                className={`${
+                  isActive("/")
+                    ? "text-[#F7602C] font-bold border-b-2 border-[#F7602C]"
+                    : "hover:text-[#F7602C]"
+                }`}
+              >
+                Home
+              </Link>
             </li>
             <li>
-              <Link href="/about">About</Link>
+              <Link
+                href="/about"
+                className={`${
+                  isActive("/about")
+                    ? "text-[#F7602C] font-bold border-b-2 border-[#F7602C]"
+                    : "hover:text-[#F7602C]"
+                }`}
+              >
+                About
+              </Link>
             </li>
             <li>
-              <Link href="/allHotels">All Hotels</Link>
+              <Link
+                href="/allHotels"
+                className={`${
+                  isActive("/allHotels")
+                    ? "text-[#F7602C] font-bold border-b-2 border-[#F7602C]"
+                    : "hover:text-[#F7602C]"
+                }`}
+              >
+                All Hotels
+              </Link>
             </li>
             <li>
-              <Link href="/coverage">Coverage</Link>
+              <Link
+                href="/coverage"
+                className={`${
+                  isActive("/coverage")
+                    ? "text-[#F7602C] font-bold border-b-2 border-[#F7602C]"
+                    : "hover:text-[#F7602C]"
+                }`}
+              >
+                Coverage
+              </Link>
             </li>
           </ul>
         </nav>
