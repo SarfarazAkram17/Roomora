@@ -38,7 +38,7 @@ const Footer = () => {
         <div>
           <h3 className="text-lg font-bold mb-3">Quick Links</h3>
           <nav>
-            <ul className="flex flex-col items-start gap-4 p-3 font-semibold text-sm">
+            <ul className="flex flex-col items-start gap-4 p-3 font-semibold text-sm xl:text-[1rem]">
               <li>
                 <Link
                   href="/"
