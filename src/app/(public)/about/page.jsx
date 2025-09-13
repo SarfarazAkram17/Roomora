@@ -1,3 +1,4 @@
+'use client'
 import Image from "next/image";
 import { FaGithub } from "react-icons/fa";
 

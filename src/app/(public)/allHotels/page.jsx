@@ -1,9 +1,10 @@
+'use client'
 import React from 'react';
 
 const AllHotels = () => {
     return (
         <div>
-            all Hotels
+            all hotels
         </div>
     );
 };

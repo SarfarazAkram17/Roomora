@@ -4,14 +4,16 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const isActive = (path) => pathname === path;
+  const { user, logout } = useAuth();
 
   return (
-    <header className="sticky top-0 backdrop-blur-2xl p-4 h-20 w-full bg-white shadow-md z-50">
+    <header className="sticky top-0 backdrop-blur-2xl p-4 h-20 w-full shadow-md z-50">
       <section className="max-w-[1500px] w-full mx-auto flex justify-between items-center">
         {/* Mobile Hamburger */}
         <button
@@ -82,21 +84,29 @@ const Navbar = () => {
 
         {/* Desktop Auth Buttons */}
         <div className="flex items-center gap-2">
-          <Link
-            href="/login"
-            className="bg-transparent border-2 border-[#F7602C] hover:bg-[#F7602C] text-[#F7602C] hover:text-white/90 font-bold px-4 py-2 rounded-sm"
-          >
-            Login
-          </Link>
-          <Link
-            href="/register"
-            className="bg-[#F7602C] hidden md:flex border-2 border-[#F7602C] text-white/90 hover:text-[#F7602C] hover:bg-transparent font-bold px-4 py-2 rounded-sm"
-          >
-            Register
-          </Link>
-          <button className="bg-red-400 cursor-pointer text-white/90 font-bold px-4 py-2 rounded-sm">
-            Logout
-          </button>
+          {user ? (
+            <button
+              onClick={() => logout()}
+              className="bg-red-400 cursor-pointer text-white/90 font-bold px-4 py-2 rounded-sm"
+            >
+              Logout
+            </button>
+          ) : (
+            <>
+              <Link
+                href="/login"
+                className="bg-transparent border-2 border-[#F7602C] hover:bg-[#F7602C] text-[#F7602C] hover:text-white/90 font-bold px-4 py-2 rounded-sm"
+              >
+                Login
+              </Link>
+              <Link
+                href="/register"
+                className="bg-[#F7602C] hidden md:flex border-2 border-[#F7602C] text-white/90 hover:text-[#F7602C] hover:bg-transparent font-bold px-4 py-2 rounded-sm"
+              >
+                Register
+              </Link>
+            </>
+          )}
         </div>
       </section>
 
@@ -127,15 +137,17 @@ const Navbar = () => {
               </li>
             </ul>
           </nav>
-          <div className="flex flex-col items-center gap-2 pb-4">
-            <Link
-              href="/register"
-              className="bg-[#F7602C] border-2 border-[#F7602C] text-white hover:text-[#F7602C] hover:bg-transparent font-bold px-4 py-2 rounded-sm"
-              onClick={() => setIsOpen(false)}
-            >
-              Register
-            </Link>
-          </div>
+          {!user && (
+            <div className="flex flex-col items-center gap-2 pb-4">
+              <Link
+                href="/register"
+                className="bg-[#F7602C] border-2 border-[#F7602C] text-white hover:text-[#F7602C] hover:bg-transparent font-bold px-4 py-2 rounded-sm"
+                onClick={() => setIsOpen(false)}
+              >
+                Register
+              </Link>
+            </div>
+          )}
         </div>
       )}
     </header>

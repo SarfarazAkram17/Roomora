@@ -8,15 +8,16 @@ import registerLottie from "../../../../public/register.json";
 import { Button, TextField } from "@mui/material";
 import { LoaderCircle } from "lucide-react";
 import axios from "axios";
+import { useAuth } from "@/context/AuthContext";
 
 const RegisterPage = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [fullName, setFullName] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
   const [preview, setPreview] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
+  const { loading, register } = useAuth();
 
   useEffect(() => {
     return () => {
@@ -34,7 +35,6 @@ const RegisterPage = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    setLoading(true);
 
     const imageData = new FormData();
     imageData.append("file", selectedFile);
@@ -50,20 +50,12 @@ const RegisterPage = () => {
       );
 
       const imageUrl = imageRes.data.secure_url;
-      console.log("Uploaded image URL:", imageUrl, fullName, email, password);
+
+      await register(name, email, password, imageUrl);
     } catch (err) {
       console.error(err);
-      toast.error(err.message || "Registration failed");
+      toast.error(error.response?.data?.message || error.message || "Registration failed");
     }
-
-    //  axiosInstance.post("/users", {
-    //   email,
-    //   name: res.user.displayName,
-    //   role: "customer",
-    //   photo: res.user.photoURL,
-    //   createdAt: res.user.metadata.createdAt,
-    //   last_log_in: Date.now().toString(),
-    // });
   };
 
   return (
@@ -105,8 +97,8 @@ const RegisterPage = () => {
                 className="w-full"
                 required
                 type="text"
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
             </div>
 

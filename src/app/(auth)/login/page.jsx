@@ -2,36 +2,37 @@
 import { useState } from "react";
 import Link from "next/link";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-// import { toast } from "react-toastify";
 import Lottie from "lottie-react";
 import loginLottie from "../../../../public/login.json";
 import { Button, TextField } from "@mui/material";
 import { LoaderCircle } from "lucide-react";
+import { useAuth } from "@/context/AuthContext";
+import { toast } from "react-toastify";
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+  const { loading, login } = useAuth();
 
-  const handleLogin = (e) => {
-    e.preventDefault()
-    setLoading(true);
+  const handleLogin = async (e) => {
+    e.preventDefault();
 
-    console.log(email, password);
-    //  axiosInstance.post("/users", {
-    //   email,
-    //   name: res.user.displayName,
-    //   role: "customer",
-    //   photo: res.user.photoURL,
-    //   createdAt: res.user.metadata.createdAt,
-    //   last_log_in: Date.now().toString(),
-    // });
+    try {
+      await login(email, password);
+    } catch (error) {
+      console.error(err);
+      toast.error(error.response?.data?.message || error.message || "Registration failed");
+    }
   };
 
   return (
     <div className="flex flex-col my-6 max-w-[1500px] mx-auto px-4 sm:flex-row gap-6 justify-start items-center md:justify-center">
-      <Lottie className="flex-1 h-96" animationData={loginLottie} loop={true}></Lottie>
+      <Lottie
+        className="flex-1 h-96"
+        animationData={loginLottie}
+        loop={true}
+      ></Lottie>
 
       <div className="w-full flex-1 shadow-xl rounded-md">
         <div className="px-4 py-12">

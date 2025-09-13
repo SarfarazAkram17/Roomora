@@ -1,11 +1,13 @@
-import { Link } from "next/link";
+"use client";
+import Link from "next/link";
 import Lottie from "lottie-react";
+import errorLottie from "../../public/error.json";
 
-const ErrorPage = () => {
+const NotFound = () => {
   return (
     <div className="pb-8 flex flex-col items-center justify-center text-center bg-base-100 px-4">
       {/* 🔝 Lottie Animation */}
-      <Lottie animationData='/error.json' loop={true} className="w-[28%]" />
+      <Lottie animationData={errorLottie} loop={true} className="w-[28%]" />
 
       {/* Subtitle */}
       <p className="mt-3 text-gray-600 text-lg max-w-md">
@@ -15,7 +17,10 @@ const ErrorPage = () => {
 
       {/* Actions */}
       <div className="mt-6">
-        <Link href="/" className="bg-[#F7602C] hidden md:flex border-2 border-[#F7602C] text-white hover:text-[#F7602C] hover:bg-transparent font-bold px-4 py-2 rounded-sm">
+        <Link
+          href="/"
+          className="bg-[#F7602C] border-2 border-[#F7602C] text-white/90 font-bold px-4 py-2 rounded-sm"
+        >
           Go to Home
         </Link>
       </div>
@@ -23,4 +28,4 @@ const ErrorPage = () => {
   );
 };
 
-export default ErrorPage;
+export default NotFound;

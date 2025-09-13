@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ToastContainer } from "react-toastify";
+import { AuthProvider } from "@/context/AuthContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,8 +19,8 @@ export const metadata = {
   title: "Roomora",
   description: "Roomora is a room booking platform.",
   icons: {
-    icon: '/favicon.png'
-  }
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({ children }) {
@@ -28,10 +29,12 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ToastContainer></ToastContainer>
-        <Navbar></Navbar>
-        {children}
-        <Footer></Footer>
+        <AuthProvider>
+          <ToastContainer />
+          <Navbar />
+          {children}
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   );
