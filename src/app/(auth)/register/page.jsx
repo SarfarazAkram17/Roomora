@@ -54,7 +54,7 @@ const RegisterPage = () => {
       await register(name, email, password, imageUrl);
     } catch (err) {
       console.error(err);
-      toast.error(error.response?.data?.message || error.message || "Registration failed");
+      toast.error(err.response?.data?.message || err.message || "Registration failed");
     }
   };
 

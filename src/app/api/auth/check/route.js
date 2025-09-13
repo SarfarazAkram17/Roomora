@@ -4,13 +4,8 @@ import collections from "@/lib/db";
 
 export async function GET(req) {
   try {
-    // Get email from query string
-    const { searchParams } = new URL(req.url);
-    const email = searchParams.get("email");
-
     // Verify JWT
-    const result = verifyJwt(email);
-
+    const result = verifyJwt();
     if (result.error) {
       return NextResponse.json(
         { authenticated: false, message: result.error },
@@ -18,7 +13,7 @@ export async function GET(req) {
       );
     }
 
-    const { password, ...user } = await collections.users.findOne({ email });
+    const {password, ...user} = await collections.users.findOne({ email: result.user.email });
 
     return NextResponse.json({
       authenticated: true,

@@ -85,12 +85,15 @@ const Navbar = () => {
         {/* Desktop Auth Buttons */}
         <div className="flex items-center gap-2">
           {user ? (
-            <button
-              onClick={() => logout()}
-              className="bg-red-400 cursor-pointer text-white/90 font-bold px-4 py-2 rounded-sm"
-            >
-              Logout
-            </button>
+            <>
+              <Image src={user.photo} height={48} width={48} alt={user.name} className="rounded-full h-12 w-12" />
+              <button
+                onClick={() => logout()}
+                className="bg-red-400 cursor-pointer text-white/90 font-bold px-4 py-2 rounded-sm"
+              >
+                Logout
+              </button>
+            </>
           ) : (
             <>
               <Link

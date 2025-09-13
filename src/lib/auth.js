@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 
-export const verifyJwt = (email) => {
+export const verifyJwt = () => {
   const cookieStore = cookies();
   const token = cookieStore.get("token")?.value;
 
@@ -11,13 +11,7 @@ export const verifyJwt = (email) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-    // If you pass an email, enforce match
-    if (email && decoded.email !== email) {
-      return { error: "Forbidden: Email mismatch" };
-    }
-
-    return { user: decoded }; // contains email (and maybe role if stored)
+    return { user: decoded };
   } catch (err) {
     return { error: "Forbidden: Invalid or expired token" };
   }

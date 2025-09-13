@@ -21,7 +21,7 @@ const LoginPage = () => {
     try {
       await login(email, password);
     } catch (error) {
-      console.error(err);
+      console.error(error);
       toast.error(error.response?.data?.message || error.message || "Registration failed");
     }
   };
