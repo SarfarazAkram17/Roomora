@@ -12,7 +12,7 @@ const DashboardNavbar = () => {
       <section className="max-w-[1500px] w-full mx-auto flex justify-between items-center">
         {/* Mobile Hamburger */}
         <button
-          className="lg:hidden hover:bg-gray-300 bg-gray-200 rounded-sm flex items-center py-2 px-3 mr-4"
+          className="lg:hidden hover:bg-gray-300 bg-gray-200 rounded-sm flex items-center py-2 px-3 mr-3"
           onClick={() => setIsOpen(true)}
         >
           <Menu size={20} />

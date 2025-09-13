@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   MdDashboard,
   MdPerson,
@@ -42,12 +42,21 @@ const routes = [
 export default function DashboardSidebar() {
   const { loading, user, isOpen, setIsOpen, logout } = useAuth();
   const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     if (typeof window !== "undefined" && window.innerWidth < 1024) {
       setIsOpen(false);
     }
   }, [setIsOpen]);
+
+  useEffect(() => {
+    if (!loading && !user) {
+      router.push("/login");
+    }
+  }, [loading, user]);
+
+  if (loading) return
 
   return (
     <section>
@@ -80,6 +89,7 @@ export default function DashboardSidebar() {
               const isActive = pathname === route.path;
               return (
                 <Link
+                  onClick={() => setIsOpen(false)}
                   key={route.name}
                   href={route.path}
                   className={`flex items-center gap-2 px-4 py-2 text-sm rounded-md transition-colors duration-200
@@ -97,7 +107,7 @@ export default function DashboardSidebar() {
             })}
 
             <div
-              onClick={logout}
+              onClick={() => logout()}
               className="px-4 py-2 rounded-md flex gap-2 mt-3 text-sm font-medium hover:bg-red-500 hover:text-white/85 items-center cursor-pointer"
             >
               <MdLogout size={20} /> Logout

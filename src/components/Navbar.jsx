@@ -67,18 +67,6 @@ const Navbar = () => {
                 All Hotels
               </Link>
             </li>
-            <li>
-              <Link
-                href="/coverage"
-                className={`${
-                  isActive("/coverage")
-                    ? "text-[#F7602C] font-bold border-b-2 border-[#F7602C]"
-                    : "hover:text-[#F7602C]"
-                }`}
-              >
-                Coverage
-              </Link>
-            </li>
           </ul>
         </nav>
 
