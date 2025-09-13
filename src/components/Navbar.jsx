@@ -86,13 +86,13 @@ const Navbar = () => {
             <>
               <Link
                 href="/login"
-                className="bg-transparent border-2 border-[#F7602C] hover:bg-[#F7602C] text-[#F7602C] hover:text-white/90 font-bold px-4 py-2 rounded-sm"
+                className="bg-transparent cursor-pointer border-2 border-[#F7602C] hover:bg-[#F7602C] text-[#F7602C] hover:text-white/90 font-bold px-4 py-2 rounded-sm"
               >
                 Login
               </Link>
               <Link
                 href="/register"
-                className="bg-[#F7602C] hidden md:flex border-2 border-[#F7602C] text-white/90 hover:text-[#F7602C] hover:bg-transparent font-bold px-4 py-2 rounded-sm"
+                className="bg-[#F7602C] cursor-pointer hidden md:flex border-2 border-[#F7602C] text-white/90 hover:text-[#F7602C] hover:bg-transparent font-bold px-4 py-2 rounded-sm"
               >
                 Register
               </Link>
@@ -132,7 +132,7 @@ const Navbar = () => {
             <div className="flex flex-col items-center gap-2 pb-4">
               <Link
                 href="/register"
-                className="bg-[#F7602C] border-2 border-[#F7602C] text-white hover:text-[#F7602C] hover:bg-transparent font-bold px-4 py-2 rounded-sm"
+                className="bg-[#F7602C] cursor-pointer border-2 border-[#F7602C] text-white hover:text-[#F7602C] hover:bg-transparent font-bold px-4 py-2 rounded-sm"
                 onClick={() => setIsOpen(false)}
               >
                 Register

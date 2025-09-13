@@ -5,39 +5,15 @@ import {
   MdDashboard,
   MdPerson,
   MdAddBox,
-  MdManageAccounts,
   MdBook,
   MdUpcoming,
   MdLogout,
 } from "react-icons/md";
+import { FaUsers } from "react-icons/fa";
 import Image from "next/image";
 import { useAuth } from "@/context/AuthContext";
 import { useEffect } from "react";
-
-const routes = [
-  { name: "Dashboard", path: "/dashboard", icon: <MdDashboard size={20} /> },
-  { name: "Profile", path: "/dashboard/profile", icon: <MdPerson size={23} /> },
-  {
-    name: "Add Hotel",
-    path: "/dashboard/addHotel",
-    icon: <MdAddBox size={20} />,
-  },
-  {
-    name: "Manage Hotel",
-    path: "/dashboard/manageHotel",
-    icon: <MdManageAccounts size={20} />,
-  },
-  {
-    name: "My Bookings",
-    path: "/dashboard/myBookings",
-    icon: <MdBook size={20} />,
-  },
-  {
-    name: "Upcoming Bookings",
-    path: "/dashboard/upcomingBookings",
-    icon: <MdUpcoming size={20} />,
-  },
-];
+import { LiaHotelSolid } from "react-icons/lia";
 
 export default function DashboardSidebar() {
   const { loading, user, isOpen, setIsOpen, logout } = useAuth();
@@ -56,14 +32,56 @@ export default function DashboardSidebar() {
     }
   }, [loading, user]);
 
-  if (loading) return
+  if (loading) return;
+
+  const routes = [
+    { name: "Dashboard", path: "/dashboard", icon: <MdDashboard size={20} /> },
+    {
+      name: "Profile",
+      path: "/dashboard/profile",
+      icon: <MdPerson size={23} />,
+    },
+    ...(user?.role === "admin"
+      ? [
+          {
+            name: "Manage Users",
+            path: "/dashboard/manageUsers",
+            icon: <FaUsers size={23} />,
+          },
+          {
+            name: "Add Hotel",
+            path: "/dashboard/addHotel",
+            icon: <MdAddBox size={20} />,
+          },
+          {
+            name: "Manage Hotel",
+            path: "/dashboard/manageHotel",
+            icon: <LiaHotelSolid size={20} />,
+          },
+        ]
+      : []),
+    ...(user?.role === "user"
+      ? [
+          {
+            name: "My Bookings",
+            path: "/dashboard/myBookings",
+            icon: <MdBook size={20} />,
+          },
+          {
+            name: "Upcoming Bookings",
+            path: "/dashboard/upcomingBookings",
+            icon: <MdUpcoming size={20} />,
+          },
+        ]
+      : []),
+  ];
 
   return (
     <section>
       {/* Sidebar */}
       <div
         className={`
-          fixed top-0 left-0 h-full w-60 bg-gray-100 shadow-md z-50
+          fixed top-0 left-0 h-full w-60 bg-gray-100 shadow-md z-40
           transform ${isOpen ? "translate-x-0" : "-translate-x-full"} 
           transition-transform duration-300 ease-in-out
           lg:translate-x-0 lg:static lg:flex lg:flex-col

@@ -13,7 +13,9 @@ export async function GET(req) {
       );
     }
 
-    const {password, ...user} = await collections.users.findOne({ email: result.user.email });
+    const { password, ...user } = await collections.users.findOne({
+      email: result.user.email,
+    });
 
     return NextResponse.json({
       authenticated: true,

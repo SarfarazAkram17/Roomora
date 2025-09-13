@@ -100,7 +100,7 @@ const RegisterPage = () => {
 
             <div className="mb-6">
               <TextField
-                label="Full Name"
+                label="Name"
                 variant="outlined"
                 className="w-full"
                 required

@@ -99,9 +99,45 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // profile update function
+  const updateProfile = async (name, photo, email) => {
+    setLoading(true);
+    try {
+      const res = await axios.patch(
+        `${window.location.origin}/api/users/updateProfile`,
+        {
+          name,
+          photo,
+          email,
+        }
+      );
+
+      if (res.status === 200) {
+        setUser(res.data.user);
+        toast.success("Profile update successfully");
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error(
+        err.response?.data?.message || err.message || "Profile update failed"
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <AuthContext.Provider
-      value={{ isOpen, setIsOpen, user, loading, register, login, logout }}
+      value={{
+        isOpen,
+        setIsOpen,
+        user,
+        loading,
+        register,
+        login,
+        logout,
+        updateProfile,
+      }}
     >
       {children}
     </AuthContext.Provider>
