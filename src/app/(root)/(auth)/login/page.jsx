@@ -3,7 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Lottie from "lottie-react";
-import loginLottie from "../../../../public/login.json";
+import loginLottie from "../../../../../public/login.json";
 import { Button, TextField } from "@mui/material";
 import { LoaderCircle } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
@@ -13,16 +13,21 @@ const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { loading, login } = useAuth();
+  const [loading, setLoading] = useState(false);
+  const { login } = useAuth();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
       await login(email, password);
     } catch (error) {
-      console.error(error);
-      toast.error(error.response?.data?.message || error.message || "Registration failed");
+      toast.error(
+        error.response?.data?.message || error.message || "Registration failed"
+      );
+    } finally {
+      setLoading(false);
     }
   };
 

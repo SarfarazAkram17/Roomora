@@ -2,6 +2,7 @@
 import Link from "next/link";
 import Lottie from "lottie-react";
 import errorLottie from "../../public/error.json";
+import '../globals.css'
 
 const NotFound = () => {
   return (

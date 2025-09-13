@@ -4,11 +4,12 @@ import Link from "next/link";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { toast } from "react-toastify";
 import Lottie from "lottie-react";
-import registerLottie from "../../../../public/register.json";
+import registerLottie from "../../../../../public/register.json";
 import { Button, TextField } from "@mui/material";
 import { LoaderCircle } from "lucide-react";
 import axios from "axios";
 import { useAuth } from "@/context/AuthContext";
+import Image from "next/image";
 
 const RegisterPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -17,7 +18,8 @@ const RegisterPage = () => {
   const [password, setPassword] = useState("");
   const [preview, setPreview] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
-  const { loading, register } = useAuth();
+  const [loading, setLoading] = useState(false);
+  const { register } = useAuth();
 
   useEffect(() => {
     return () => {
@@ -35,6 +37,7 @@ const RegisterPage = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     const imageData = new FormData();
     imageData.append("file", selectedFile);
@@ -53,8 +56,11 @@ const RegisterPage = () => {
 
       await register(name, email, password, imageUrl);
     } catch (err) {
-      console.error(err);
-      toast.error(err.response?.data?.message || err.message || "Registration failed");
+      toast.error(
+        err.response?.data?.message || err.message || "Registration failed"
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -74,9 +80,11 @@ const RegisterPage = () => {
           <form onSubmit={handleRegister}>
             <div className="mb-6">
               <label htmlFor="profileImage" className="cursor-pointer">
-                <img
+                <Image
                   src={preview || `/image-upload-icon.png`}
                   alt="Upload"
+                  height={52}
+                  width={52}
                   className="w-13 h-13 object-cover rounded-full border-2 p-0.5 border-[#F7602C]"
                 />
               </label>

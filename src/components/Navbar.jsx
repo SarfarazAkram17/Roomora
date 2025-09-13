@@ -10,10 +10,10 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const isActive = (path) => pathname === path;
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
 
   return (
-    <header className="sticky top-0 backdrop-blur-2xl p-4 h-20 w-full shadow-md z-50">
+    <header className="sticky top-0 backdrop-blur-2xl px-4 py-2 h-16 w-full shadow-md z-50">
       <section className="max-w-[1500px] w-full mx-auto flex justify-between items-center">
         {/* Mobile Hamburger */}
         <button
@@ -85,15 +85,15 @@ const Navbar = () => {
         {/* Desktop Auth Buttons */}
         <div className="flex items-center gap-2">
           {user ? (
-            <>
-              <Image src={user.photo} height={48} width={48} alt={user.name} className="rounded-full h-12 w-12" />
-              <button
-                onClick={() => logout()}
-                className="bg-red-400 cursor-pointer text-white/90 font-bold px-4 py-2 rounded-sm"
-              >
-                Logout
-              </button>
-            </>
+            <Link href="/dashboard">
+              <Image
+                src={user.photo}
+                height={48}
+                width={48}
+                alt={user.name}
+                className="rounded-full h-12 w-12"
+              />
+            </Link>
           ) : (
             <>
               <Link
