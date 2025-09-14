@@ -14,12 +14,14 @@ import Image from "next/image";
 import { useAuth } from "@/context/AuthContext";
 import { useEffect, useRef } from "react";
 import { LiaHotelSolid } from "react-icons/lia";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function DashboardSidebar() {
   const { loading, user, isOpen, setIsOpen, logout } = useAuth();
   const pathname = usePathname();
   const router = useRouter();
   const sidebarRef = useRef(null);
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     if (typeof window !== "undefined" && window.innerWidth < 1024) {
@@ -146,7 +148,10 @@ export default function DashboardSidebar() {
             })}
 
             <div
-              onClick={() => logout()}
+              onClick={() => {
+                logout();
+                queryClient.clear();
+              }}
               className="px-4 py-2 rounded-md flex gap-2 mt-3 text-sm font-medium hover:bg-red-500 hover:text-white/85 items-center cursor-pointer"
             >
               <MdLogout size={20} /> Logout
