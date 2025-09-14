@@ -33,7 +33,7 @@ export default function DashboardLayout({ children }) {
         <Providers>
           <AuthProvider>
             <ToastContainer />
-            <div className="flex min-h-screen">
+            <div className="flex">
               <DashboardSidebar />
               <main className="flex-1 flex flex-col gap-4 p-4">
                 <DashboardNavbar></DashboardNavbar>

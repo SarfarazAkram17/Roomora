@@ -4,9 +4,11 @@ import { Button, TextField } from "@mui/material";
 import axios from "axios";
 import { LoaderCircle } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { FiEdit3, FiX } from "react-icons/fi";
 import { toast } from "react-toastify";
+import Loader from "@/components/Loader";
 
 const Profile = () => {
   const { user, loading: authLoading, updateProfile } = useAuth();
@@ -15,12 +17,19 @@ const Profile = () => {
   const [preview, setPreview] = useState(null);
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     if (user?.photo && !preview) {
       setPreview(user.photo);
     }
   }, [user?.photo, preview]);
+
+  useEffect(() => {
+    if (!authLoading) {
+      if (!user) router.push("/login");
+    }
+  }, [user, authLoading, router]);
 
   useEffect(() => {
     return () => {
@@ -78,33 +87,31 @@ const Profile = () => {
     }
   };
 
-  if (authLoading) return;
+  if (authLoading) return <Loader />;
 
   return (
     <div className="px-4">
       <h2 className="text-3xl font-bold mb-8 text-[#F7602C]">
-        Welcome back, {user.name} 👋
+        Welcome back, {user?.name} 👋
       </h2>
 
       <div className="shadow-lg w-fit min-w-2xl p-6 bg-white rounded-lg">
         <div className="flex flex-col sm:flex-row gap-8 md:items-center">
-          <Image
-            src={user.photo}
-            height={156}
-            width={156}
+          <img
+            src={user?.photo}
             alt="Profile"
-            className="w-44 h-44 rounded-full object-cover border-4 border-[#F7602C] shadow"
+            className="w-48 h-48 rounded-full object-cover border-4 border-[#F7602C] shadow"
           />
           <div className="flex-1 space-y-3">
             <p>
-              <span className="font-semibold">Name:</span> {user.name}
+              <span className="font-semibold">Name:</span> {user?.name}
             </p>
             <p>
-              <span className="font-semibold">Email:</span> {user.email}
+              <span className="font-semibold">Email:</span> {user?.email}
             </p>
             <p>
               <span className="font-semibold">Role:</span>{" "}
-              <span className="capitalize">{user.role}</span>
+              <span className="capitalize">{user?.role}</span>
             </p>
             <button
               onClick={handleEditClick}
@@ -175,7 +182,7 @@ const Profile = () => {
                   className="w-full"
                   required
                   type="text"
-                  defaultValue={user.name}
+                  defaultValue={user?.name}
                   onChange={(e) => setName(e.target.value)}
                 />
 
@@ -189,7 +196,6 @@ const Profile = () => {
                   </button>
                   <Button
                     onClick={handleUpdate}
-                    className="hover:text-white/90"
                     disabled={loading || !preview}
                     variant="contained"
                   >

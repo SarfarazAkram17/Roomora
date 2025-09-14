@@ -138,7 +138,7 @@ export default function DashboardSidebar() {
               <span className="animate-pulse">Loading...</span>
             ) : (
               <>
-                <Image
+                <img
                   src={user?.photo}
                   alt={user?.name}
                   height={48}
