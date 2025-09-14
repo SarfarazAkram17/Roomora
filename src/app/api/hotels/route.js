@@ -2,6 +2,41 @@ import { verifyJwt } from "@/lib/auth";
 import collections from "@/lib/db";
 import { NextResponse } from "next/server";
 
+export async function GET(req) {
+  try {
+    const { searchParams } = req.nextUrl;
+    
+    let page = searchParams.get("page");
+    let limit = searchParams.get("limit");
+    page = parseInt(page) || 1;
+    limit = parseInt(limit) || 12;
+
+    const skip = (page - 1) * limit;
+
+    const total = await collections.hotels.countDocuments();
+    const hotels = await collections.hotels
+      .find()
+      .skip(skip)
+      .limit(limit)
+      .toArray();
+
+    return NextResponse.json(
+      {
+        success: true,
+        hotels,
+        total,
+      },
+      { status: 201 }
+    );
+  } catch (error) {
+    console.error("Error getting hotel:", error);
+    return NextResponse.json(
+      { success: false, message: "Failed to get hotels" },
+      { status: 500 }
+    );
+  }
+}
+
 export async function POST(req) {
   try {
     const verifyToken = verifyJwt();
@@ -29,7 +64,7 @@ export async function POST(req) {
       amenities,
       images,
       description,
-      createdAt,
+      addedAt,
     } = body;
 
     if (!name || !location || !totalRooms || !pricePerNight || !description) {
@@ -48,12 +83,16 @@ export async function POST(req) {
       amenities: amenities || [],
       images: images || [],
       description,
-      createdAt,
-      bookedRooms: 0
+      addedAt,
+      bookedRooms: 0,
     });
 
     return NextResponse.json(
-      { success: true, message: "Hotel added successfully", hotelId: result.insertedId },
+      {
+        success: true,
+        message: "Hotel added successfully",
+        hotelId: result.insertedId,
+      },
       { status: 201 }
     );
   } catch (error) {

@@ -74,8 +74,8 @@ export default function DashboardSidebar() {
             icon: <MdAddBox size={20} />,
           },
           {
-            name: "Manage Hotel",
-            path: "/dashboard/manageHotel",
+            name: "Manage Hotels",
+            path: "/dashboard/manageHotels",
             icon: <LiaHotelSolid size={20} />,
           },
         ]

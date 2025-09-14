@@ -52,6 +52,7 @@ const AddHotel = () => {
     },
     onSuccess: () => {
       toast.success("Hotel added successfully!");
+      reset()
       reset({
         amenities: [],
       });
@@ -123,7 +124,7 @@ const AddHotel = () => {
       amenities: data.amenities.map((a) => a.value),
       images: imageURLs,
       description: data.description,
-      createdAt: new Date().toISOString(),
+      addedAt: new Date().toISOString(),
     };
 
     addHotel(hotelData);
@@ -285,7 +286,7 @@ const AddHotel = () => {
           {isPending ? (
             <>
               <LoaderCircle className="animate-spin text-[#F7602C]" />{" "}
-              <span className="animate-pulse">Adding Hotel...</span>
+              <span className="animate-pulse ml-1">Adding Hotel...</span>
             </>
           ) : (
             "Add Hotel"
