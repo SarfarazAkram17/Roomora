@@ -150,6 +150,7 @@ export default function DashboardSidebar() {
             <div
               onClick={() => {
                 logout();
+                router.push("/login");
                 queryClient.clear();
               }}
               className="px-4 py-2 rounded-md flex gap-2 mt-3 text-sm font-medium hover:bg-red-500 hover:text-white/85 items-center cursor-pointer"

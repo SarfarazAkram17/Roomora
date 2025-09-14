@@ -13,7 +13,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@mui/material";
 import { toast } from "react-toastify";
 
-const ManageProducts = () => {
+const ManageHotels = () => {
   const { user, loading } = useAuth();
   const [page, setPage] = useState(1);
   const router = useRouter();
@@ -173,4 +173,4 @@ const ManageProducts = () => {
   );
 };
 
-export default ManageProducts;
+export default ManageHotels;
