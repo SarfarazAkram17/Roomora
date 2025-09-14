@@ -12,8 +12,8 @@ await client.connect();
 const db = client.db('Roomora')
 const collections = {
     users: db.collection('users'),
-    bookings: db.collection('users'),
-    hotels: db.collection('users'),
+    bookings: db.collection('bookings'),
+    hotels: db.collection('hotels'),
 }
 
 export default collections;

@@ -33,11 +33,14 @@ export default function DashboardLayout({ children }) {
         <Providers>
           <AuthProvider>
             <ToastContainer />
-            <div className="flex">
+            <div className="flex h-screen overflow-hidden">
+              {/* Sidebar (fixed height) */}
               <DashboardSidebar />
-              <main className="flex-1 flex flex-col gap-4 p-4">
-                <DashboardNavbar></DashboardNavbar>
-                {children}
+
+              {/* Main content area (scrollable) */}
+              <main className="flex-1 flex flex-col overflow-y-auto">
+                <DashboardNavbar />
+                <div className="p-4">{children}</div>
               </main>
             </div>
           </AuthProvider>
