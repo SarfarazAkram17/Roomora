@@ -23,9 +23,25 @@ export async function PATCH(req, { params }) {
       );
     }
 
+    const booking = await collections.bookings.findOne({
+      _id: new ObjectId(id),
+    });
     const updatedBooking = await collections.bookings.updateOne(
       { _id: new ObjectId(id) },
       { $set: body }
+    );
+
+    const hotelQuery = { _id: new ObjectId(booking.hotelId) };
+    const hotel = await collections.hotels.findOne(hotelQuery);
+    const updateHotelDoc = {
+      $set: {
+        bookedRooms: hotel.bookedRooms - booking.rooms,
+      },
+    };
+
+    await collections.hotels.updateOne(
+      hotelQuery,
+      updateHotelDoc
     );
 
     const response = NextResponse.json(

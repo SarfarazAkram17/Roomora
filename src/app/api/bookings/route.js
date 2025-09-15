@@ -88,19 +88,6 @@ export async function POST(req) {
     const bookingData = await req.json();
     const result = await collections.bookings.insertOne(bookingData);
 
-    const hotelQuery = { _id: new ObjectId(bookingData.hotelId) };
-    const hotel = await collections.hotels.findOne(hotelQuery);
-    const updateHotelDoc = {
-      $set: {
-        bookedRooms: hotel.bookedRooms + bookingData.rooms,
-      },
-    };
-
-    const updateBookedRoomsInHotel = await collections.hotels.updateOne(
-      hotelQuery,
-      updateHotelDoc
-    );
-
     return NextResponse.json(
       { success: true, bookingId: result.insertedId },
       { status: 201 }

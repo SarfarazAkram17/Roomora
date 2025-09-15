@@ -30,6 +30,21 @@ export async function PATCH(req, { params }) {
       { $set: body }
     );
 
+    const booking = await collections.bookings.findOne({
+      _id: new ObjectId(id),
+    });
+    const hotelQuery = { _id: new ObjectId(booking.hotelId) };
+    const hotel = await collections.hotels.findOne(hotelQuery)
+    if (body.status === "confirmed") {
+      const updateHotelDoc = {
+        $set: {
+          bookedRooms: hotel.bookedRooms + booking.rooms,
+        },
+      };
+
+      await collections.hotels.updateOne(hotelQuery, updateHotelDoc);
+    }
+
     return NextResponse.json(
       {
         message: "Booking updated successfully",
