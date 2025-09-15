@@ -1,20 +1,15 @@
 "use client";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import Link from "next/link";
-import { FiEdit3, FiTrash2 } from "react-icons/fi";
 import { Pagination } from "antd";
-import { FaEye } from "react-icons/fa";
 import { useAuth } from "@/context/AuthContext";
 import axios from "axios";
 import Loader from "@/components/Loader";
-import { useRouter } from "next/navigation";
-import { Button } from "@mui/material";
+import HotelCard from "@/components/HotelCard";
 
 const AllHotels = () => {
-  const { user, loading } = useAuth();
+  const { loading } = useAuth();
   const [page, setPage] = useState(1);
-  const router = useRouter();
 
   // Fetch hotels
   const { data, isLoading } = useQuery({
@@ -48,39 +43,7 @@ const AllHotels = () => {
           {/* Products Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {hotels.map((hotel) => (
-              <div
-                key={hotel._id}
-                className="border h-full rounded-xl overflow-hidden shadow hover:shadow-lg transition duration-500"
-              >
-                <img
-                  src={hotel.images[0]}
-                  alt={hotel.name}
-                  className="w-full h-52 sm:h-60 object-cover"
-                />
-                <div className="p-4 space-y-2">
-                  <h3 className="text-xl font-semibold text-[#F7602C]">
-                    {hotel.name}
-                  </h3>
-
-                  <p className="text-sm text-gray-600 line-clamp-3">{hotel.description}</p>
-
-                  <p className="text-sm">
-                    <strong>Price per night:</strong> ৳{hotel.pricePerNight}
-                  </p>
-
-                  <div className="mt-4">
-                    <Link href={`/hotels/${hotel._id}`}>
-                      <Button
-                        variant="contained"
-                        sx={{ fontSize: "12px" }}
-                        className="text-white"
-                      >
-                        <FaEye size={15} className="mr-1" /> Details
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-              </div>
+              <HotelCard key={hotel._id} hotel={hotel} />
             ))}
           </div>
 

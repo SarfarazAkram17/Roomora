@@ -17,6 +17,7 @@
     "antd": "^5.27.3",
     "axios": "^1.12.1",
     "bcryptjs": "^3.0.2",
+    "framer-motion": "^12.23.12",
     "jsonwebtoken": "^9.0.2",
     "lottie-react": "^2.4.1",
     "lucide-react": "^0.544.0",
