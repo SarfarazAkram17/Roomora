@@ -1,3 +1,4 @@
+'use client'
 import { useQuery } from "@tanstack/react-query";
 import { FaMoneyBillWave } from "react-icons/fa";
 import { FaArrowsRotate } from "react-icons/fa6";

@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function Banner() {
   return (
-    <section className="relative h-[80vh] xl:h-[70vh] 2xl:h-[50vh] 2xl:rounded-2xl max-w-[1500px] mx-auto flex items-center justify-center rounded-lg overflow-hidden text-white">
+    <section className="relative h-[80vh] 2xl:h-[50vh] 2xl:rounded-2xl max-w-[1500px] mx-auto flex items-center justify-center rounded-lg overflow-hidden text-white">
       <Image
         src="/banner.jpg"
         alt="Luxury hotel"
