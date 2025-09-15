@@ -156,7 +156,7 @@ const AllBookings = () => {
         refetch();
       } catch (err) {
         if (err.status === 403) {
-          router.push("/login");
+          router.push("/forbidden");
         }
         toast.error(
           err.response?.data?.message || err.message || "Update failed"

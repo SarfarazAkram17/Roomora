@@ -14,7 +14,9 @@ const HomePage = () => {
 
   return (
     <div className="space-y-12 my-6">
-      <Banner />
+      <div className="px-4">
+        <Banner />
+      </div>
       <HowItWorks />
       <FeaturedHotels></FeaturedHotels>
       <WhyChooseUs></WhyChooseUs>

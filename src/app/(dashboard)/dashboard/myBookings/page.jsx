@@ -158,7 +158,7 @@ const MyBookings = () => {
         refetch();
       } catch (err) {
         if (err.status === 403) {
-          router.push("/login");
+          router.push("/forbidden");
         }
         toast.error(
           err.response?.data?.message || err.message || "Payment failed"
@@ -192,7 +192,7 @@ const MyBookings = () => {
         refetch();
       } catch (err) {
         if (err.status === 403) {
-          router.push("/login");
+          router.push("/forbidden");
         }
         toast.error(
           err.response?.data?.message || err.message || "Cancel failed"

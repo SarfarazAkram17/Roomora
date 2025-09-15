@@ -25,7 +25,9 @@ import FirstPageIcon from "@mui/icons-material/FirstPage";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
-import { TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 // ---------------------- Custom Pagination Actions ----------------------
 function TablePaginationActions(props) {
@@ -142,11 +144,39 @@ const ManageUsers = () => {
     }
   }, [user, loading, router]);
 
+  const handleDelete = async (id) => {
+    const result = await Swal.fire({
+      title: "Delete user?",
+      text: "Are you sure you want to delete this user?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, Delete",
+      cancelButtonText: "No",
+    });
+
+    if (result.isConfirmed) {
+      try {
+        const res = await axios.delete(
+          `${window.location.origin}/api/users/${id}`
+        );
+        toast.success("User deleted");
+        refetch();
+      } catch (err) {
+        if (err.status === 403) {
+          router.push("/forbidden");
+        }
+        toast.error(
+          err.response?.data?.message || err.message || "Delete failed"
+        );
+      }
+    }
+  };
+
   if (loading) return <Loader />;
 
   return (
     <div className="px-4">
-      <h2 className="text-2xl font-bold mb-4 text-center text-primary">
+      <h2 className="text-2xl font-bold mb-4 text-center text-[#F7602C]">
         Manage Users
       </h2>
 
@@ -218,6 +248,7 @@ const ManageUsers = () => {
                 <TableCell sx={{ py: 0.5 }}>Name</TableCell>
                 <TableCell sx={{ py: 0.5 }}>Email</TableCell>
                 <TableCell sx={{ py: 0.5 }}>Role</TableCell>
+                <TableCell sx={{ py: 0.5 }}>Actions</TableCell>
               </TableRow>
             </TableHead>
 
@@ -240,6 +271,18 @@ const ManageUsers = () => {
                   <TableCell sx={{ py: 0.5 }}>{u.email}</TableCell>
                   <TableCell sx={{ py: 0.5 }} className="capitalize">
                     {u.role}
+                  </TableCell>
+                  <TableCell sx={{ py: 0.5 }}>
+                    <Button
+                      onClick={() => handleDelete(u._id)}
+                      variant="contained"
+                      sx={{ fontSize: "12px", padding: "6px" }}
+                      size="small"
+                      className="text-white"
+                      color="error"
+                    >
+                      Delete
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))}

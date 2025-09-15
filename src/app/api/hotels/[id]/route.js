@@ -129,7 +129,6 @@ export async function DELETE(req, { params }) {
       );
     }
 
-    // ✅ Insert hotel data
     const result = await collections.hotels.deleteOne({
       _id: new ObjectId(id),
     });
@@ -143,9 +142,9 @@ export async function DELETE(req, { params }) {
       { status: 200 }
     );
   } catch (error) {
-    console.error("Error adding hotel:", error);
+    console.error("Error deleting hotel:", error);
     return NextResponse.json(
-      { success: false, message: "Failed to add hotel" },
+      { success: false, message: "Failed to delete hotel" },
       { status: 500 }
     );
   }
