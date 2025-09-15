@@ -22,7 +22,7 @@ export async function GET(req) {
     page = parseInt(page) || 1;
     limit = parseInt(limit) || 10;
 
-    const query = { userEmail: result.user.email };
+    const query = { userEmail: result.user.email, status: {$eq: "confirmed"} };
 
     const today = new Date();
     query.checkIn = { $gt: today.toISOString() };

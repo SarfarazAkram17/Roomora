@@ -259,7 +259,6 @@ const UpcomingBookings = () => {
                 <TableCell>Check-out</TableCell>
                 <TableCell>Total Price</TableCell>
                 <TableCell>Status</TableCell>
-                <TableCell>Actions</TableCell>
               </TableRow>
             </TableHead>
 
@@ -288,37 +287,6 @@ const UpcomingBookings = () => {
                     )}
                     {b.status === "completed" && (
                       <Chip label="Completed" color="success" size="small" />
-                    )}
-                  </TableCell>
-                  <TableCell>
-                    {b.payment_status === "pending" ? (
-                      <>
-                        <Button
-                          onClick={() => handlePay(b._id)}
-                          variant="contained"
-                          sx={{
-                            fontSize: "12px",
-                            padding: "6px",
-                            marginRight: "4px",
-                          }}
-                          size="small"
-                          className="text-white"
-                        >
-                          Pay
-                        </Button>
-                        <Button
-                          onClick={() => handleCancel(b._id)}
-                          variant="contained"
-                          sx={{ fontSize: "12px", padding: "6px" }}
-                          size="small"
-                          className="text-white"
-                          color="error"
-                        >
-                          Cancel
-                        </Button>
-                      </>
-                    ) : (
-                      "---"
                     )}
                   </TableCell>
                 </TableRow>

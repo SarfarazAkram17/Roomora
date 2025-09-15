@@ -326,7 +326,7 @@ const MyBookings = () => {
               <TableRow>
                 <TablePagination
                   rowsPerPageOptions={[10, 20, 30]}
-                  colSpan={7}
+                  colSpan={8}
                   count={total}
                   rowsPerPage={rowsPerPage}
                   page={page}

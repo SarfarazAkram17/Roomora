@@ -292,7 +292,7 @@ const ManageUsers = () => {
               <TableRow>
                 <TablePagination
                   rowsPerPageOptions={[10, 20, 30]}
-                  colSpan={5}
+                  colSpan={6}
                   count={total}
                   rowsPerPage={rowsPerPage}
                   page={page}
