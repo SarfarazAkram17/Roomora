@@ -71,6 +71,11 @@ export default function DashboardSidebar() {
             icon: <FaUsers size={23} />,
           },
           {
+            name: "All Bookings",
+            path: "/dashboard/allBookings",
+            icon: <MdBook size={20} />,
+          },
+          {
             name: "Add Hotel",
             path: "/dashboard/addHotel",
             icon: <MdAddBox size={20} />,

@@ -5,7 +5,7 @@ import { ObjectId } from "mongodb";
 
 export async function PATCH(req, { params }) {
   try {
-    const { id } = params;
+    const { id } = await params;
     const { email, ...body } = await req.json();
 
     const result = verifyJwt();
@@ -25,11 +25,11 @@ export async function PATCH(req, { params }) {
       );
     }
 
-    const updateBooking = await collections.bookings.updateOne(
+    const updatedBooking = await collections.bookings.updateOne(
       { _id: new ObjectId(id) },
       { $set: body }
     );
-    console.log(updateBooking);
+
     return NextResponse.json(
       {
         message: "Booking updated successfully",
