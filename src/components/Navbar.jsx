@@ -13,8 +13,8 @@ const Navbar = () => {
   const { user } = useAuth();
 
   return (
-    <header className="sticky top-0 backdrop-blur-2xl px-4 py-2 h-16 w-full shadow-md z-50">
-      <section className="max-w-[1500px] w-full mx-auto flex justify-between items-center">
+    <header className="sticky top-0 backdrop-blur-2xl py-2 h-16 w-full shadow-md z-50">
+      <section className="max-w-[1500px] w-full mx-auto flex px-4 justify-between items-center">
         {/* Mobile Hamburger */}
         <button
           className="md:hidden hover:bg-gray-300 bg-gray-200 rounded-sm flex items-center p-2 mr-2"

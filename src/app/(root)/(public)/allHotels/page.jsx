@@ -34,7 +34,7 @@ const AllHotels = () => {
   if (loading || isLoading) return <Loader />;
 
   return (
-    <div className="px-4">
+    <div className="px-4 my-6 max-w-[1500px] mx-auto">
       <h2 className="text-3xl md:text-4xl font-bold text-center text-[#F7602C] mb-10">
         All Hotels
       </h2>
@@ -46,7 +46,7 @@ const AllHotels = () => {
       ) : (
         <>
           {/* Products Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {hotels.map((hotel) => (
               <div
                 key={hotel._id}

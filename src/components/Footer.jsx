@@ -15,8 +15,8 @@ const Footer = () => {
   const isActive = (path) => pathname === path;
 
   return (
-    <footer className="bg-gray-200 px-4 mt-10 border-t border-gray-200">
-      <div className="max-w-[1500px] mx-auto py-10 grid md:grid-cols-3 gap-6">
+    <footer className="bg-gray-200 mt-10 border-t border-gray-200">
+      <div className="max-w-[1500px] px-4 mx-auto py-10 grid md:grid-cols-3 gap-6">
         {/* Brand Section */}
         <div>
           <Link href="/" className="flex items-center gap-1">
@@ -27,9 +27,9 @@ const Footer = () => {
               width={200}
             />
           </Link>
-          <p className="mt-3 text-sm text-gray-600 leading-relaxed">
+          <p className="mt-3 text-sm xl:text-[1rem] text-gray-600 leading-relaxed">
             Roomora makes hotel booking simple and hassle-free. Discover our
-            top-rated hotels, explore detailed coverage, and book your stay with
+            top-rated hotels and book your stay with
             confidence. Your comfort, our priority.
           </p>
         </div>

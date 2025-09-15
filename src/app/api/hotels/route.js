@@ -26,7 +26,7 @@ export async function GET(req) {
         hotels,
         total,
       },
-      { status: 201 }
+      { status: 200 }
     );
   } catch (error) {
     console.error("Error getting hotel:", error);

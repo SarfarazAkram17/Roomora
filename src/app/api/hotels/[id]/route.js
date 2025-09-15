@@ -12,7 +12,7 @@ export async function GET(req, { params }) {
         success: true,
         hotel,
       },
-      { status: 201 }
+      { status: 200 }
     );
   } catch (error) {
     console.error("Error getting hotel:", error);
@@ -99,7 +99,7 @@ export async function PATCH(req, { params }) {
 
     return NextResponse.json(
       { success: true, message: "Product updated successfully" },
-      { status: 201 }
+      { status: 200 }
     );
   } catch (error) {
     console.error("Error updating hotel:", error);
@@ -140,7 +140,7 @@ export async function DELETE(req, { params }) {
         message: "Hotel deleted successfully",
         deletedCount: result.deletedCount,
       },
-      { status: 201 }
+      { status: 200 }
     );
   } catch (error) {
     console.error("Error adding hotel:", error);

@@ -1,6 +1,6 @@
-import { NextResponse } from "next/server";
 import { verifyJwt } from "@/lib/auth";
 import collections from "@/lib/db";
+import { NextResponse } from "next/server";
 
 export async function GET(req) {
   try {
@@ -12,50 +12,39 @@ export async function GET(req) {
       );
     }
 
-    if (result.user.role !== "admin") {
-      return NextResponse.json(
-        { message: "Forbidden access: Admin only route" },
-        { status: 403 }
-      );
-    }
-
     const { searchParams } = req.nextUrl;
 
     let page = searchParams.get("page");
     let limit = searchParams.get("limit");
+    let status = searchParams.get("status");
     let search = searchParams.get("search");
-    let searchType = searchParams.get("searchType");
-    let role = searchParams.get("role");
 
     page = parseInt(page) || 1;
     limit = parseInt(limit) || 10;
 
-    const query = {};
+    const query = { userEmail: result.user.email };
 
     if (search) {
       const regex = new RegExp(search, "i");
-      if (searchType === "email") {
-        query.email = regex;
-      } else {
-        query.name = regex;
-      }
+      query.hotelName = regex;
     }
 
-    if (role && role !== "") {
-      query.role = role;
+    if (status) {
+      query.status = status;
     }
 
     const skip = (page - 1) * limit;
-    const total = await collections.users.countDocuments(query);
-    const users = await collections.users
+    const total = await collections.bookings.countDocuments(query);
+    const bookings = await collections.bookings
       .find(query)
+      .sort({ bookedAt: -1 })
       .skip(skip)
       .limit(limit)
       .toArray();
 
     const response = NextResponse.json(
       {
-        users,
+        bookings,
         total,
       },
       { status: 200 }
@@ -63,7 +52,7 @@ export async function GET(req) {
 
     return response;
   } catch (error) {
-    console.error("users getting Error:", error);
+    console.error("bookings getting Error:", error);
     return NextResponse.json(
       { message: "Something went wrong" },
       { status: 500 }
