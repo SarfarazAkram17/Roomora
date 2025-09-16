@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { useQuery } from "@tanstack/react-query";
 import { FaMoneyBillWave } from "react-icons/fa";
 import { FaArrowsRotate } from "react-icons/fa6";
@@ -41,8 +41,10 @@ const UserDashboard = () => {
   useEffect(() => {
     if (!loading) {
       if (!user) router.push("/login");
-      else if (user.role !== "user")
+      else if (user?.role !== "user") {
         toast.error("You are admin you don't see users stats");
+        router.back();
+      }
     }
   }, [user, loading, router]);
 
@@ -58,14 +60,14 @@ const UserDashboard = () => {
   if (loading || isLoading) return <Loader />;
 
   return (
-    <div className="px-4 space-y-8">
+    <div className="space-y-8">
       <h2 className="text-center text-[#F7602C] font-bold text-3xl sm:text-4xl mb-8">
         Dashboard
       </h2>
 
       {/* Summary Cards */}
       <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
-        <div className="bg-pink-100 text-pink-800 rounded-xl p-5 shadow-sm hover:shadow-lg transition-shadow duration-300 flex items-center gap-4">
+        <div className="bg-purple-100 text-purple-800 rounded-xl p-5 shadow-sm hover:shadow-lg transition-shadow duration-300 flex items-center gap-4">
           <MdBook size={35} />
           <div>
             <p className="text-lg font-bold">{totalBookings || 0}</p>
@@ -89,7 +91,7 @@ const UserDashboard = () => {
           </div>
         </div>
 
-        <div className="bg-orange-100 text-orange-800 rounded-xl p-5 shadow-sm hover:shadow-lg transition-shadow duration-300 flex items-center gap-4">
+        <div className="bg-red-100 text-red-800 rounded-xl p-5 shadow-sm hover:shadow-lg transition-shadow duration-300 flex items-center gap-4">
           <TbCalendarCancel size={35} />
           <div>
             <p className="text-lg font-bold">{cancelledBookings || 0}</p>

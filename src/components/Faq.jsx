@@ -67,7 +67,7 @@ const Faq = () => {
         Frequently Asked Questions
       </motion.h1>
 
-      <div className="space-y-4 px-4">
+      <div className="space-y-4">
         {visibleFaqs.map((faq, index) => {
           const isActive = activeIndex === index;
           return (

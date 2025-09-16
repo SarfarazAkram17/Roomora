@@ -5,10 +5,8 @@ import { useAuth } from "@/context/AuthContext";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import Loader from "@/components/Loader";
-import { Button, Chip, TextField } from "@mui/material";
+import { Chip, TextField } from "@mui/material";
 import Select from "react-select";
-import { useTheme } from "@mui/material/styles";
-import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -18,62 +16,8 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import IconButton from "@mui/material/IconButton";
-import FirstPageIcon from "@mui/icons-material/FirstPage";
-import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
-import LastPageIcon from "@mui/icons-material/LastPage";
 import { toast } from "react-toastify";
-import Swal from "sweetalert2";
-
-// ---------------------- Pagination Actions ----------------------
-function TablePaginationActions(props) {
-  const theme = useTheme();
-  const { count, page, rowsPerPage, onPageChange } = props;
-
-  return (
-    <Box sx={{ flexShrink: 0, ml: 2.5 }}>
-      <IconButton
-        onClick={(e) => onPageChange(e, 0)}
-        disabled={page === 0}
-        aria-label="first page"
-      >
-        {theme.direction === "rtl" ? <LastPageIcon /> : <FirstPageIcon />}
-      </IconButton>
-      <IconButton
-        onClick={(e) => onPageChange(e, page - 1)}
-        disabled={page === 0}
-        aria-label="previous page"
-      >
-        {theme.direction === "rtl" ? (
-          <KeyboardArrowRight />
-        ) : (
-          <KeyboardArrowLeft />
-        )}
-      </IconButton>
-      <IconButton
-        onClick={(e) => onPageChange(e, page + 1)}
-        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-        aria-label="next page"
-      >
-        {theme.direction === "rtl" ? (
-          <KeyboardArrowLeft />
-        ) : (
-          <KeyboardArrowRight />
-        )}
-      </IconButton>
-      <IconButton
-        onClick={(e) =>
-          onPageChange(e, Math.max(0, Math.ceil(count / rowsPerPage) - 1))
-        }
-        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-        aria-label="last page"
-      >
-        {theme.direction === "rtl" ? <FirstPageIcon /> : <LastPageIcon />}
-      </IconButton>
-    </Box>
-  );
-}
+import TablePaginationActions from "@/lib/pagination";
 
 // ---------------------- Booking Status Filter ----------------------
 const statusOptions = [
@@ -97,8 +41,10 @@ const UpcomingBookings = () => {
   useEffect(() => {
     if (!loading) {
       if (!user) router.push("/login");
-      else if (user.role !== "user")
+      else if (user.role !== "user") {
         toast.info("You are not allowded for this page");
+        router.back();
+      }
     }
   }, [user, loading, router]);
 
@@ -136,78 +82,10 @@ const UpcomingBookings = () => {
     refetch();
   }, [statusFilter, searchTerm, page, rowsPerPage]);
 
-  const handlePay = async (id) => {
-    const result = await Swal.fire({
-      title: "Confirm Payment?",
-      text: "Are you sure you want to pay for this booking?",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Yes, Pay",
-      cancelButtonText: "No",
-    });
-
-    if (result.isConfirmed) {
-      try {
-        const res = await axios.patch(
-          `${window.location.origin}/api/myBookings/${id}`,
-          {
-            email: user.email,
-            payment_status: "paid",
-            status: "confirmed",
-            paidAt: new Date().toISOString(),
-          }
-        );
-        toast.success("Payment successful!");
-        refetch();
-      } catch (err) {
-        if (err.status === 403) {
-          router.push("/forbidden");
-        }
-        toast.error(
-          err.response?.data?.message || err.message || "Payment failed"
-        );
-      }
-    }
-  };
-
-  const handleCancel = async (id) => {
-    const result = await Swal.fire({
-      title: "Cancel Booking?",
-      text: "Are you sure you want to cancel this booking?",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Yes, Cancel",
-      cancelButtonText: "No",
-    });
-
-    if (result.isConfirmed) {
-      try {
-        const res = await axios.patch(
-          `${window.location.origin}/api/myBookings/${id}`,
-          {
-            email: user.email,
-            payment_status: "cancelled",
-            status: "cancelled",
-            cancelledAt: new Date().toISOString(),
-          }
-        );
-        toast.success("Booking cancelled!");
-        refetch();
-      } catch (err) {
-        if (err.status === 403) {
-          router.push("/forbidden");
-        }
-        toast.error(
-          err.response?.data?.message || err.message || "Cancel failed"
-        );
-      }
-    }
-  };
-
   if (loading) return <Loader />;
 
   return (
-    <div className="px-4">
+    <div>
       <h2 className="text-2xl font-bold mb-4 text-center text-[#F7602C]">
         Upcoming Bookings
       </h2>

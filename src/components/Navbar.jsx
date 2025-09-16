@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
@@ -12,11 +12,34 @@ const Navbar = () => {
   const isActive = (path) => pathname === path;
   const { user } = useAuth();
 
+  // 🔑 refs for detecting outside clicks
+  const menuRef = useRef(null);
+  const buttonRef = useRef(null);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleClickOutside = (e) => {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(e.target) &&
+        buttonRef.current &&
+        !buttonRef.current.contains(e.target)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isOpen]);
+
   return (
     <header className="sticky top-0 backdrop-blur-2xl py-2 h-16 w-full shadow-md z-50">
       <section className="max-w-[1500px] w-full mx-auto flex px-4 justify-between items-center">
         {/* Mobile Hamburger */}
         <button
+          ref={buttonRef}
           className="md:hidden hover:bg-gray-300 bg-gray-200 rounded-sm flex items-center p-2 mr-2"
           onClick={() => setIsOpen(!isOpen)}
         >
@@ -103,7 +126,10 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-white border-t border-gray-200 shadow-md w-44">
+        <div
+          ref={menuRef}
+          className="md:hidden bg-white border-t border-gray-200 shadow-md w-44 absolute z-100 top-full left-2 rounded-md"
+        >
           <nav>
             <ul className="flex flex-col items-center gap-4 p-3 font-semibold text-sm">
               <li>
@@ -119,11 +145,6 @@ const Navbar = () => {
               <li>
                 <Link href="/allHotels" onClick={() => setIsOpen(false)}>
                   All Hotels
-                </Link>
-              </li>
-              <li>
-                <Link href="/coverage" onClick={() => setIsOpen(false)}>
-                  Coverage
                 </Link>
               </li>
             </ul>

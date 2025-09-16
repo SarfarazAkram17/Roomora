@@ -20,8 +20,6 @@ import Loader from "@/components/Loader";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-const COLORS = ["#FF6384", "#36A2EB", "#FFCE56", "#4CAF50", "#9C27B0"];
-
 const AdminDashboard = () => {
   const { user, loading } = useAuth();
   const router = useRouter();
@@ -49,7 +47,7 @@ const AdminDashboard = () => {
   const monthlyPaymentsData = stats.monthlyPaymentsData || [];
 
   return (
-    <div className="px-4">
+    <div>
       <div>
         <h2 className="text-center text-[#F7602C] font-bold text-3xl sm:text-4xl mb-8">
           Admin Dashboard
@@ -91,7 +89,7 @@ const AdminDashboard = () => {
         </div>
 
         {/* Monthly Bookings */}
-        <div className="bg-white shadow-xl mt-6 rounded-xl p-6">
+        <div className="bg-white shadow-xl mt-6 rounded-xl p-4">
           <h3 className="text-xl font-bold mb-4">Monthly Bookings Trend</h3>
           {monthlyBookingsData.length > 0 ? (
             <ResponsiveContainer width="100%" height={300}>
@@ -117,7 +115,7 @@ const AdminDashboard = () => {
         </div>
 
         {/* Payments */}
-        <div className="bg-white shadow-xl mt-6 rounded-xl p-6">
+        <div className="bg-white shadow-xl mt-6 rounded-xl p-4">
           <h3 className="text-xl font-bold mb-4">Payments per Month</h3>
           {monthlyPaymentsData.length > 0 ? (
             <ResponsiveContainer width="100%" height={300}>

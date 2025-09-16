@@ -133,7 +133,7 @@ const AddHotel = () => {
   if (loading) return <Loader />;
 
   return (
-    <div className="p-6 bg-white shadow rounded-lg">
+    <div>
       <h2 className="text-2xl font-bold mb-6 text-[#F7602C] text-center">
         Add New Hotel
       </h2>

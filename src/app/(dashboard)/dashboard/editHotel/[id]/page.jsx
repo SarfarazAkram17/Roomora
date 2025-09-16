@@ -166,7 +166,7 @@ const EditHotel = ({ params }) => {
   if (loading || isLoading) return <Loader />;
 
   return (
-    <div className="p-6 bg-white shadow rounded-lg">
+    <div>
       <h2 className="text-3xl md:text-4xl font-bold text-[#F7602C] mb-6 text-center">
         Edit Product: {hotelData.name}
       </h2>

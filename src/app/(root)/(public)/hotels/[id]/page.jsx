@@ -114,12 +114,12 @@ const HotelDetails = ({ params }) => {
               className="object-cover rounded-lg"
             />
           </div>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             {hotel.images.map((img, idx) => (
               <div
                 key={idx}
                 onClick={() => setSelectedImage(img)}
-                className={`w-36 h-28 relative cursor-pointer rounded border-2 ${
+                className={`w-28 h-20 sm:w-36 sm:h-28 relative cursor-pointer rounded border-2 ${
                   selectedImage === img ? "border-[#F7602C]" : "border-gray-300"
                 }`}
               >
@@ -162,7 +162,7 @@ const HotelDetails = ({ params }) => {
       </div>
 
       {/* Booking Section */}
-      <div className="bg-white shadow-md rounded-lg p-6">
+      <div className="bg-white shadow-md rounded-lg p-4 sm:p-6">
         <h2 className="text-2xl font-bold mb-4 text-[#F7602C]">Book Now</h2>
         <form onSubmit={handleSubmit(handleBooking)} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

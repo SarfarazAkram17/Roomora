@@ -90,13 +90,13 @@ const Profile = () => {
   if (authLoading) return <Loader />;
 
   return (
-    <div className="px-4">
+    <div>
       <h2 className="text-3xl font-bold mb-8 text-[#F7602C]">
         Welcome back, {user?.name} 👋
       </h2>
 
-      <div className="shadow-lg w-fit min-w-2xl p-6 bg-white rounded-lg">
-        <div className="flex flex-col sm:flex-row gap-8 md:items-center">
+      <div className="shadow-lg w-contain max-w-2xl p-5 bg-white rounded-lg">
+        <div className="flex flex-col sm:flex-row gap-8 sm:items-center">
           <img
             src={user?.photo}
             alt="Profile"

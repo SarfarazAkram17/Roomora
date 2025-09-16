@@ -75,7 +75,7 @@ const ManageHotels = () => {
   if (loading || isLoading) return <Loader />;
 
   return (
-    <div className="px-4">
+    <div>
       <h2 className="text-3xl md:text-4xl font-bold text-center text-[#F7602C] mb-10">
         Manage Hotels
       </h2>
@@ -87,7 +87,7 @@ const ManageHotels = () => {
       ) : (
         <>
           {/* Products Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
             {hotels.map((hotel) => (
               <div
                 key={hotel._id}
@@ -114,40 +114,38 @@ const ManageHotels = () => {
                     <strong>Price per night:</strong> ৳{hotel.pricePerNight}
                   </p>
 
-                  <div className="flex justify-between items-center mt-4">
-                    <div className="flex gap-2">
-                      <Link href={`/hotels/${hotel._id}`}>
-                        <Button
-                          variant="contained"
-                          sx={{ fontSize: "10px" }}
-                          size="small"
-                          className="text-white"
-                        >
-                          <FaEye size={15} className="mr-1" /> Details
-                        </Button>
-                      </Link>
-                      <Link href={`/dashboard/editHotel/${hotel._id}`}>
-                        <Button
-                          variant="contained"
-                          sx={{ fontSize: "10px" }}
-                          size="small"
-                          className="text-white"
-                          color="secondary"
-                        >
-                          <FiEdit3 size={15} className="mr-1" /> Edit
-                        </Button>
-                      </Link>
+                  <div className="flex gap-2 flex-wrap mt-4 items-center">
+                    <Link href={`/hotels/${hotel._id}`}>
                       <Button
                         variant="contained"
-                        onClick={() => handleDelete(hotel._id)}
                         sx={{ fontSize: "10px" }}
                         size="small"
-                        color="error"
                         className="text-white"
                       >
-                        <FiTrash2 size={15} className="mr-1" /> Delete
+                        <FaEye size={15} className="mr-1" /> Details
                       </Button>
-                    </div>
+                    </Link>
+                    <Link href={`/dashboard/editHotel/${hotel._id}`}>
+                      <Button
+                        variant="contained"
+                        sx={{ fontSize: "10px" }}
+                        size="small"
+                        className="text-white"
+                        color="secondary"
+                      >
+                        <FiEdit3 size={15} className="mr-1" /> Edit
+                      </Button>
+                    </Link>
+                    <Button
+                      variant="contained"
+                      onClick={() => handleDelete(hotel._id)}
+                      sx={{ fontSize: "10px" }}
+                      size="small"
+                      color="error"
+                      className="text-white"
+                    >
+                      <FiTrash2 size={15} className="mr-1" /> Delete
+                    </Button>
                   </div>
                 </div>
               </div>
