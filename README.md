@@ -62,4 +62,4 @@ This project demonstrates a complete modern web application built with **Next.js
 
 ### 1. Clone the repository
 git clone https://github.com/SarfarazAkram17/Roomora.git <br />
-cd roomora
+cd Roomora
