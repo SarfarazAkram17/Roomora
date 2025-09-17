@@ -13,9 +13,11 @@ export async function GET(req) {
       );
     }
 
-    const { password, ...user } = await collections.users.findOne({
+    const userDoc = await collections.users.findOne({
       email: result.user.email,
     });
+
+    const { password, ...user } = userDoc
 
     return NextResponse.json({
       authenticated: true,

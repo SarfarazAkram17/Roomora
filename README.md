@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Roomora
 
-## Getting Started
+## Project Description
 
-First, run the development server:
+**Roomora** is a full-stack hotel booking platform designed to make booking and managing hotel rooms seamless for users. Users can browse hotels, check room availability, book rooms, and manage their bookings, while admins can manage hotels, monitor bookings, and view detailed statistics about users, hotels, and earnings.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+This project demonstrates a complete modern web application built with **Next.js**, **React**, **MongoDB**, and **JWT authentication**, to provide dynamic interactions for both users and admins.
 
-Open [${window.location.origin}](${window.location.origin}) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Frontend:**
 
-## Learn More
+  - Next.js
+  - React
+  - Tailwind CSS
+  - Material-UI (MUI)
+  - Ant Design (UI Components)
+  - React Query (`@tanstack/react-query`) for data fetching and caching
+  - Recharts for dynamic charts and statistics
+  - React Icons (`react-icons`, `lucide-react`) for icons
+  - React Select & React Datepicker for forms
+  - Framer Motion & Lottie React for animations
+  - React Toastify & SweetAlert2 for notifications and confirmations
+  - Cloudinary - for image hosting
 
-To learn more about Next.js, take a look at the following resources:
+- **Backend:**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+  - Next.js API Routes
+  - MongoDB
+  - JWT authentication (`jsonwebtoken`)
+  - Bcrypt for password hashing
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Other Tools:**
+  - Axios for API requests
+  - Tailwind CSS for styling
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Features
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### User Features
+
+- **User Authentication:** Sign up, login, and logout with JWT-based HttpOnly cookies.
+- **Profile Management:** View and update profile details including name, profile picture.
+- **Hotel Browsing:** Browse hotels with photos, amenities, pricing, and descriptions.
+- **Room Booking:** Book available rooms for specific dates.
+- **Booking Management:** View current and past bookings, cancel unpaid bookings.
+- **Notifications:** Toast and modal notifications for successful actions, errors.
+
+### Admin Features
+
+- **Hotel Management:** Add, update, and delete hotel listings. Manage total rooms, pricing, amenities, and images.
+- **Booking Management:** View all bookings, filter by status, and update booking statuses.
+- **Statistics Dashboard:** Monitor total users, hotels, bookings, and earnings. View monthly booking and payment trends using charts.
+- **Role-Based Access:** Admin routes are protected; users cannot access admin-only pages.
+
+---
+
+## Setup Instructions
+
+### 1. Clone the repository
+git clone https://github.com/SarfarazAkram17/Roomora.git <br />
+cd roomora

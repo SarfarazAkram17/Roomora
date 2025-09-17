@@ -14,7 +14,7 @@ const FeaturedHotels = () => {
     },
     keepPreviousData: true,
   });
-console.log(data)
+
   const hotels = data?.hotels || [];
 
   return (
