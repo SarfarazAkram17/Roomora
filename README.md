@@ -58,6 +58,23 @@ This project demonstrates a complete modern web application built with **Next.js
 
 ---
 
+### 🔐 Admin Credentials
+
+- ✉️ **Email**: `sam@akram.com`
+- 🔑 **Password**: `Sarfaraz`
+
+---
+
+### 👨‍💻 Developer
+
+- 🧑‍💻 **Name**: Sarfaraz Akram
+- 🌍 **Portfolio**: [https://sarfarazakram.netlify.app](https://sarfarazakram.netlify.app)
+- 📧 **Email**: sarfaraz.akram055@gmail.com
+- 🐱 **GitHub**: [Sarfaraz Akram](https://github.com/SarfarazAkram17)
+- 👔 **LinkedIn**: [Sarfaraz Akram](https://linkedin.com/in/sarfarazakram)
+
+---
+
 ### Clone the repository
 git clone https://github.com/SarfarazAkram17/Roomora.git <br />
 cd Roomora
