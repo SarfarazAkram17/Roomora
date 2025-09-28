@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { Bed, CalendarCheck, ClipboardList, CreditCard } from "lucide-react";
+import { Bed, CalendarCheck, ClipboardList } from "lucide-react";
 
 const steps = [
   {

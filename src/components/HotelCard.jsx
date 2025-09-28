@@ -1,5 +1,4 @@
 "use client";
-
 import { Button } from "@mui/material";
 import Link from "next/link";
 import { FaEye } from "react-icons/fa";

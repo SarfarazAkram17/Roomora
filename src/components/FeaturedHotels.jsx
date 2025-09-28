@@ -1,7 +1,9 @@
+"use client";
 import React from "react";
 import HotelCard from "./HotelCard";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import SkeletonHotelCard from "./SkeletonHotelCard";
 
 const FeaturedHotels = () => {
   const { data, isLoading } = useQuery({
@@ -24,9 +26,11 @@ const FeaturedHotels = () => {
       </h2>
 
       {isLoading ? (
-        <p className="text-center text-lg animate-pulse text-gray-600">
-          Loading...
-        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <SkeletonHotelCard key={i} />
+          ))}
+        </div>
       ) : hotels.length === 0 ? (
         <p className="text-center text-lg text-gray-600">
           No hotels available yet.

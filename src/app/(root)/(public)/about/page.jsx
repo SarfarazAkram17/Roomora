@@ -1,14 +1,7 @@
-"use client";
-import Loader from "@/components/Loader";
-import { useAuth } from "@/context/AuthContext";
 import Image from "next/image";
 import { FaGithub } from "react-icons/fa";
 
 const AboutPage = () => {
-  const { loading } = useAuth();
-
-  if (loading) return <Loader />;
-
   return (
     <section className="my-6 text-center max-w-[1500px] px-4 mx-auto">
       {/* Header */}
